@@ -21,7 +21,7 @@ public class Client {
 	public Client(){
 		destinationIP = "127.0.0.1";
 		port = 9995;
-		send = "JOSH IS Asadfsadfa";
+		send = "JOSH IS'NT Asadfsadfa";
 	}
 	
 	public Client(String message){
