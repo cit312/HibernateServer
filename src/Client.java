@@ -33,10 +33,11 @@ public class Client {
 	public void transmit()
 	{
 		try {
-			System.out.println("Brayden BLABLA");
+			System.out.println("Attempting Connection...\n");
 			toServer = new Socket(destinationIP, port);
+			System.out.println("Connected to " + toServer.getInetAddress().getCanonicalHostName());
 			jsonOut = new JSONOutputStream(toServer.getOutputStream());
-
+			
 			jsonOut.writeObject(send);
 			toServer.close();
 
