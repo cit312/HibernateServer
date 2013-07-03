@@ -1,10 +1,13 @@
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
 import org.quickconnectfamily.json.JSONException;
 import org.quickconnectfamily.json.JSONOutputStream;
+
+import com.example.hibernate.User;
 
 public class Client {
 	Socket toServer;
@@ -38,7 +41,9 @@ public class Client {
 			System.out.println("Connected to " + toServer.getInetAddress().getCanonicalHostName());
 			jsonOut = new JSONOutputStream(toServer.getOutputStream());
 			
-			jsonOut.writeObject(send);
+			CommBean bean = new CommBean();
+			
+			jsonOut.writeObject(bean);
 			toServer.close();
 
 		} catch (UnknownHostException e) {

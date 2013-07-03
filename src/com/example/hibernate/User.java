@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @SuppressWarnings("unused")
 @Entity
 @Table(name = "app_user")
-public class User {
+public class User{
     
     @Id
     @GeneratedValue
