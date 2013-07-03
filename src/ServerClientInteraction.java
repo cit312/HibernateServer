@@ -2,7 +2,6 @@
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
-import java.util.HashMap;
 
 import org.quickconnectfamily.json.JSONException;
 import org.quickconnectfamily.json.JSONInputStream;
@@ -26,11 +25,9 @@ public class ServerClientInteraction implements Runnable{
 
 		try {
 			jsonIn = new JSONInputStream(fromClientSocket.getInputStream());
-			HashMap data = (HashMap) jsonIn.readObject();
-			//inString = (String)jsonIn.readObject();
+			inString = (String)jsonIn.readObject();
 			
-			
-			System.out.println(data.get("data"));
+			System.out.println(inString);
 			fromClientSocket.close(); //Clean-up
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
