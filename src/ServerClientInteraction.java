@@ -47,10 +47,9 @@ public class ServerClientInteraction implements Runnable{
 			HashMap<String,String> numbers = new HashMap<String,String>();
 			numbers.put("one", "more");
 			numbers.put("two", "another");
-			numbers.put("three", "The third thing");
 			
 			//put data into serializable bean
-			CommBean data = new CommBean("Testing");
+			CommBean data = new CommBean("Response!!");
 			data.setData(numbers);
 			
 			//jsonOut = new JSONOutputStream(fromClientSocket.getInputStream());
@@ -64,6 +63,10 @@ public class ServerClientInteraction implements Runnable{
 			//Close the socket stuff or w/e it is
 			//jsonOut.writeObject(data);
 			//returnToClient.close();
+			
+			//Send data
+			jsonOut = new JSONOutputStream(fromClientSocket.getOutputStream());
+			jsonOut.writeObject(data);
 			
 			fromClientSocket.close(); //Clean-up
 		} catch (JSONException e) {
