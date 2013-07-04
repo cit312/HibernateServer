@@ -15,11 +15,42 @@ public class GetPivots implements Handler {
 		attr.put("Attr2", "Last changed on that day");
 		attr.put("Attr3", "60 degrees to the left");
 		pivots.put("Pivot 1", attr);
+		
 		attr = new HashMap<String,String>();
 		attr.put("Attr1", "It is 160 seconds late");
 		attr.put("Attr2", "changed on that day");
 		attr.put("Attr3", "160 degrees to the left");
 		pivots.put("Pivot 2", attr);
+		
+		attr = new HashMap<String,String>();
+		attr.put("Attr1", "It is 160 seconds late");
+		attr.put("Attr2", "changed on that day");
+		attr.put("Attr3", "160 degrees to the left");
+		pivots.put("Pivot 3", attr);
+		
+		attr = new HashMap<String,String>();
+		attr.put("Attr1", "It is 160 seconds late");
+		attr.put("Attr2", "changed on that day");
+		attr.put("Attr3", "160 degrees to the left");
+		pivots.put("Pivot 4", attr);
+		
+		attr = new HashMap<String,String>();
+		attr.put("Attr1", "It is 160 seconds late");
+		attr.put("Attr2", "changed on that day");
+		attr.put("Attr3", "160 degrees to the left");
+		pivots.put("Pivot 5", attr);
+		
+		attr = new HashMap<String,String>();
+		attr.put("Attr1", "It is 160 seconds late");
+		attr.put("Attr2", "changed on that day");
+		attr.put("Attr3", "160 degrees to the left");
+		pivots.put("Pivot 6", attr);
+		
+		attr = new HashMap<String,String>();
+		attr.put("Attr1", "It is 160 seconds late");
+		attr.put("Attr2", "changed on that day");
+		attr.put("Attr3", "160 degrees to the left");
+		pivots.put("Pivot 7", attr);
 		
 		//Put bean into hashmap
 		
