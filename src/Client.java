@@ -41,7 +41,7 @@ public class Client {
 			System.out.println("Connected to " + toServer.getInetAddress().getCanonicalHostName());
 			jsonOut = new JSONOutputStream(toServer.getOutputStream());
 			
-			CommBean bean = new CommBean("command");
+			CommBean bean = new CommBean();
 			
 			jsonOut.writeObject(bean);
 			toServer.close();

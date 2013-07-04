@@ -10,7 +10,7 @@ import com.example.hibernate.User;
 public class createUser implements Handler {
 
 	@Override
-	public void handleIt(HashMap data) {
+	public CommBean handleIt(HashMap data) {
 		// Collect VARs
 		String name = (String) data.get("userName");
 		String pass = (String) data.get("password");
@@ -36,6 +36,8 @@ public class createUser implements Handler {
          * the instances were each updated with a database generated id.
          */
         System.out.println("aUser generated ID is: " + aNameUser.getId());
+        
+        return null;
 	}
 
 }

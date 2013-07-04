@@ -6,12 +6,13 @@ public class ApplicationController {
 	
 	public ApplicationController(){
 		commMap = new HashMap<String, Handler>();
-	//	commMap.put("getPivots",new getPivots());
+		commMap.put("getPivots",new GetPivots());
 		commMap.put("createUser",new createUser());
+		commMap.put("test",new Test());
 	}
 	
-	public void handleRequest(String command, HashMap data){
+	public CommBean handleRequest(String command, HashMap data){
 		Handler hand = commMap.get(command);
-		hand.handleIt(data);
+		return hand.handleIt(data);
 	}
 }

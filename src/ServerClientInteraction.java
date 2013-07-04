@@ -25,6 +25,7 @@ public class ServerClientInteraction implements Runnable{
 		this.fromClientSocket = s;
 	}
 	
+	@Override
 	public void run(){
 
 		try {
@@ -33,24 +34,16 @@ public class ServerClientInteraction implements Runnable{
 			inString = (HashMap) jsonIn.readObject();
 			
 			//Syntax to get values from hashmap. may have changed
-			//String command = (String) inString.get("command");
+			String command = (String) inString.get("command");
 			
 			//*** 2. Handle the request based on command***
-			//ApplicationController apCntrl = new ApplicationController();
-			//apCntrl.handleRequest(command, inString);
+			ApplicationController apCntrl = new ApplicationController();
+			CommBean returnedData = apCntrl.handleRequest(command, inString);
 			
 			//Debugging. See incoming hashmap
 			System.out.println(inString);
 			
 			//*** 3. Return Data ***
-			//debuging: create fake data
-			HashMap<String,String> numbers = new HashMap<String,String>();
-			numbers.put("one", "more");
-			numbers.put("two", "another");
-			
-			//put data into serializable bean
-			CommBean data = new CommBean("Response!!");
-			data.setData(numbers);
 			
 			//jsonOut = new JSONOutputStream(fromClientSocket.getInputStream());
 			//JSONOutputStream.writeObject(data);
@@ -61,16 +54,16 @@ public class ServerClientInteraction implements Runnable{
 			//jsonOut = new JSONOutputStream(returnToClient.getOutputStream());
 			
 			//Close the socket stuff or w/e it is
+			
 			//jsonOut.writeObject(data);
 			//returnToClient.close();
 			
 			//Send data
 			jsonOut = new JSONOutputStream(fromClientSocket.getOutputStream());
-			jsonOut.writeObject(data);
+			jsonOut.writeObject(returnedData);
 			
 			fromClientSocket.close(); //Clean-up
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e){
 			e.printStackTrace();
