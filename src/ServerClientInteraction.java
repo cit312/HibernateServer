@@ -1,6 +1,7 @@
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.HashMap;
 
@@ -15,6 +16,8 @@ public class ServerClientInteraction implements Runnable{
 	private JSONInputStream jsonIn;
 	private JSONOutputStream jsonOut;
 	private HashMap inString;
+	private Socket client;
+	private Socket returnToClient;
 	
 	private byte[] b;
 	
@@ -25,14 +28,43 @@ public class ServerClientInteraction implements Runnable{
 	public void run(){
 
 		try {
+			//*** 1. Read In Info***
 			jsonIn = new JSONInputStream(fromClientSocket.getInputStream());
 			inString = (HashMap) jsonIn.readObject();
-			String command = (String) inString.get("command");
 			
-			ApplicationController apCntrl = new ApplicationController();
-			apCntrl.handleRequest(command, inString);
+			//Syntax to get values from hashmap. may have changed
+			//String command = (String) inString.get("command");
 			
+			//*** 2. Handle the request based on command***
+			//ApplicationController apCntrl = new ApplicationController();
+			//apCntrl.handleRequest(command, inString);
+			
+			//Debugging. See incoming hashmap
 			System.out.println(inString);
+			
+			//*** 3. Return Data ***
+			//debuging: create fake data
+			HashMap<String,String> numbers = new HashMap<String,String>();
+			numbers.put("one", "more");
+			numbers.put("two", "another");
+			numbers.put("three", "The third thing");
+			
+			//put data into serializable bean
+			CommBean data = new CommBean("Testing");
+			data.setData(numbers);
+			
+			//jsonOut = new JSONOutputStream(fromClientSocket.getInputStream());
+			//JSONOutputStream.writeObject(data);
+			
+			//PrintWriter out = new PrintWriter(client.getOutputStream(), true);
+			//out.println("Returned Stuff");
+			//returnToClient = new Socket(fromClientSocket.getRemoteSocketAddress().toString(), 9995);
+			//jsonOut = new JSONOutputStream(returnToClient.getOutputStream());
+			
+			//Close the socket stuff or w/e it is
+			//jsonOut.writeObject(data);
+			//returnToClient.close();
+			
 			fromClientSocket.close(); //Clean-up
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

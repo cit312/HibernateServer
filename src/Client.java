@@ -16,20 +16,20 @@ public class Client {
 	JSONOutputStream jsonOut;
 	byte[] b = new byte[100];
 	
-	String destinationIP = "192.168.1.2";
+	String destinationIP = "127.0.0.1";
 	int port;
 	String send;
 	
 
 	public Client(){
-		destinationIP = "192.168.1.2";
+		destinationIP = "127.0.0.1";
 		port = 9995;
 		send = "JOSH IS'NT Asadfsadfa";
 	}
 	
 	public Client(String message){
 		this.send = message;
-		destinationIP = "192.168.1.2";
+		destinationIP = "127.0.0.1";
 		port = 9995;
 	}
 	
@@ -41,7 +41,7 @@ public class Client {
 			System.out.println("Connected to " + toServer.getInetAddress().getCanonicalHostName());
 			jsonOut = new JSONOutputStream(toServer.getOutputStream());
 			
-			CommBean bean = new CommBean();
+			CommBean bean = new CommBean("command");
 			
 			jsonOut.writeObject(bean);
 			toServer.close();
