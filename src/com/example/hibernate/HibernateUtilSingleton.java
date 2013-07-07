@@ -27,13 +27,13 @@ private static final SessionFactory sessionFactory;
 
             //change the next line of code to match your MySQL url
 
-            config.setProperty("hibernate.connection.url", "jdbc:mysql://localhost/test");
+            config.setProperty("hibernate.connection.url", "jdbc:mysql://localhost/app");
 
             //change the next two lines of code to match your MySQL user name and password.
 
-            config.setProperty("hibernate.connection.username", "student");
+            config.setProperty("hibernate.connection.username", "root");
 
-            config.setProperty("hibernate.connection.password", "student");
+            config.setProperty("hibernate.connection.password", "cangetin");
 
             //change the pool size to reflect how many users you expect your application to have initially
 

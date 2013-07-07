@@ -16,39 +16,39 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 @SuppressWarnings("unused")
 @Entity
-@Table(name = "app_user")
+@Table(name = "user")
 public class User{
     
     @Id
     @GeneratedValue
-    private Integer id;
+    private Integer user_id;
     private String uname;
-    private String pword;
+    private String uphone;
     
     /*
      * one User can have many phone numbers.  CascadeType.ALL causes associated
      * phone numbers to be delted when a User is deleted.
      */
     @ManyToMany(cascade=CascadeType.ALL)
-    @JoinTable(
-               name="user_number",
-               joinColumns = { @JoinColumn( name="user_id") },
-               inverseJoinColumns = @JoinColumn( name="phone_id")
+    @JoinTable(name="map", 
+    		   joinColumns = { @JoinColumn( name="pivot_id") },
+               inverseJoinColumns = { @JoinColumn( name="user_id")}
                )
-    private Set<PhoneNumber> phoneNumbers;
+    
+    private Set<Pivots> pivots;
     public User() {
         // TODO Auto-generated constructor stub
     }
     
-    public String toString() {
-        return "User [id=" + id + ", pword=" + pword + ", uname=" + uname + ", phoneNumbers]";
-    }
+//    public String toString() {
+//        return "User [id=" + id + ", pword=" + pword + ", uname=" + uname + ", phoneNumbers]";
+//    }
     
     public Integer getId() {
-        return id;
+        return user_id;
     }
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(Integer user_id) {
+        this.user_id = user_id;
     }
     public String getUname() {
         return uname;
@@ -56,13 +56,13 @@ public class User{
     public void setUname(String uname) {
         this.uname = uname;
     }
-    public String getPword() {
-        return pword;
+    public String getPhone() {
+        return uphone;
     }
-    public void setPword(String pword) {
-        this.pword = pword;
+    public void setPhone(String uphone) {
+        this.uphone = uphone;
     }
-    public Set<PhoneNumber> getPhoneNumbers() {
-        return phoneNumbers;
+    public Set<Pivots> getPivots() {
+        return pivots;
     }
 }
