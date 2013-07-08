@@ -50,4 +50,14 @@ public class Pivots {
     public void setStatus(String pivot_status) {
         this.pivot_status = pivot_status;
     }
+    
+    
+	@Override
+	public String toString() {
+		return "Pivots [pivot_id=" + pivot_id + ", pivot_name=" + pivot_name
+				+ ", pivot_degrees=" + pivot_degrees + ", pivot_direction="
+				+ pivot_direction + ", pivot_status=" + pivot_status + "]";
+	}
+    
+    
 }
