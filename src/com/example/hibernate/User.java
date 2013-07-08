@@ -14,9 +14,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-@SuppressWarnings("unused")
+
 @Entity
-@Table(name = "user")
+@Table(name = "app_users")
 public class User{
     
     @Id
@@ -31,8 +31,8 @@ public class User{
      */
     @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(name="map", 
-    		   joinColumns = { @JoinColumn( name="pivot_id") },
-               inverseJoinColumns = { @JoinColumn( name="user_id")}
+    		   joinColumns = { @JoinColumn( name="user_id") },
+               inverseJoinColumns = { @JoinColumn( name="pivot_id")}
                )
     
     private Set<Pivots> pivots;
@@ -65,4 +65,11 @@ public class User{
     public Set<Pivots> getPivots() {
         return pivots;
     }
+
+	@Override
+	public String toString() {
+		return "User [user_id=" + user_id + ", uname=" + uname + ", uphone="
+				+ uphone + ", pivots=" + pivots + "]";
+	}
+    
 }

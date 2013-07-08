@@ -103,11 +103,18 @@ public class ExampleApplication {
         /*
          * iterate over each User instance returned by the query and found in the list.
          */
-        Iterator<User> iter = users.iterator();;
+        Iterator<User> iter = users.iterator();
         while(iter.hasNext()) {
             User element = iter.next();
-            //System.out.println(element.toString());
-            System.out.println("num of phone numbers: "+element.getPivots().size());
+            System.out.println("--------NEW ITERATION THING-------");
+            System.out.println(element.toString());
+            System.out.println("num of pivots: "+element.getPivots().size());
+
+            Iterator<Pivots> iter2 = element.getPivots().iterator();
+            while(iter2.hasNext()){
+            	Pivots element2 = iter2.next();
+            	System.out.println(element2.getName());
+            }
         }
         transaction.commit();
     }

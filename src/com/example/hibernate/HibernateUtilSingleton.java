@@ -62,7 +62,7 @@ private static final SessionFactory sessionFactory;
 
             config.addAnnotatedClass(User.class);
 
-            config.addAnnotatedClass(PhoneNumber.class);
+            config.addAnnotatedClass(Pivots.class);
 
             sessionFactory = config.buildSessionFactory();
 
