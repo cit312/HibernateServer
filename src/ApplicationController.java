@@ -10,6 +10,7 @@ public class ApplicationController {
 		commMap.put("createPivot",new CreatePivot());
 		commMap.put("createLog",new CreateLog());
 		commMap.put("createUser",new createUser());
+		commMap.put("getAppUsers",new GetAppUsers());
 		commMap.put("test",new Test());
 	}
 	

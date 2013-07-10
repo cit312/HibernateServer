@@ -1,17 +1,26 @@
 package com.example.hibernate;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.Query;
 //import org.apache.log4j.Logger;
 
-public class ExampleApplication {
+import org.quickconnectfamily.json.JSONException;
+import org.quickconnectfamily.json.JSONInputStream;
+import org.quickconnectfamily.json.JSONUtilities;
+
+import com.sun.corba.se.impl.oa.poa.ActiveObjectMap.Key;
+
+public class DbInteraction {
    // final static Logger logger = Logger.getLogger(ExampleApplication.class);
     private List<User> users;
     
-    public ExampleApplication() {
+    public DbInteraction() {
         // TODO Auto-generated constructor stub
     }
     /**
@@ -19,9 +28,9 @@ public class ExampleApplication {
      */
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-        ExampleApplication aSillyHibernateUseExample = new ExampleApplication();
+        DbInteraction aSillyHibernateUseExample = new DbInteraction();
         //aSillyHibernateUseExample.addNewUsers();
-        aSillyHibernateUseExample.showAllUsers();
+        System.out.println(aSillyHibernateUseExample.showAllUsers());
         //aSillyHibernateUseExample.addPivots();
         //aSillyHibernateUseExample.deletePivots();
         //aSillyHibernateUseExample.modifyUser();
@@ -60,7 +69,7 @@ public class ExampleApplication {
     /*
      * show how to get a collection of type List containing all of the records in the app_user table
      */
-    private void showAllUsers() {
+    public HashMap showAllUsers() {
         Session session = HibernateUtilSingleton.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
         /*
@@ -75,20 +84,37 @@ public class ExampleApplication {
         /*
          * iterate over each User instance returned by the query and found in the list.
          */
+//        Iterator<User> iter = users.iterator();
+//        while(iter.hasNext()) {
+//            User element = iter.next();
+//            System.out.println("--------NEW ITERATION THING-------");
+//            System.out.println(element.toString());
+//            System.out.println("num of pivots: "+element.getPivots().size());
+//
+//            Iterator<Pivots> iter2 = element.getPivots().iterator();
+//            while(iter2.hasNext()){
+//            	Pivots element2 = iter2.next();
+//            	System.out.println(element2.getName());
+//            }
+//        }
+        transaction.commit();
+        
+        //Convert to hash map
+        HashMap theUsers = new HashMap();
         Iterator<User> iter = users.iterator();
         while(iter.hasNext()) {
             User element = iter.next();
-            System.out.println("--------NEW ITERATION THING-------");
-            System.out.println(element.toString());
-            System.out.println("num of pivots: "+element.getPivots().size());
+            try {
+				theUsers.put(element.getId(), JSONUtilities.stringify(element));
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
-            Iterator<Pivots> iter2 = element.getPivots().iterator();
-            while(iter2.hasNext()){
-            	Pivots element2 = iter2.next();
-            	System.out.println(element2.getName());
-            }
         }
-        transaction.commit();
+        
+        
+        return theUsers;
     }
     
 //    /*

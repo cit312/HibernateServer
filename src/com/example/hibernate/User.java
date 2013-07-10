@@ -4,7 +4,9 @@
  * The @ManyToMany annotation shows how to make the User object aware of its phone numbers.
  */
 package com.example.hibernate;
+import java.io.Serializable;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -17,7 +19,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "app_users")
-public class User{
+public class User implements Serializable{
     
     @Id
     @GeneratedValue

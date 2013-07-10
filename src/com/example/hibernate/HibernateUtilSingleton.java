@@ -33,7 +33,8 @@ private static final SessionFactory sessionFactory;
 
             config.setProperty("hibernate.connection.username", "root");
 
-            config.setProperty("hibernate.connection.password", "cangetin");
+            //config.setProperty("hibernate.connection.password", "cangetin");
+            config.setProperty("hibernate.connection.password", "brayden");
 
             //change the pool size to reflect how many users you expect your application to have initially
 
