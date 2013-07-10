@@ -7,6 +7,7 @@ public class ApplicationController {
 	public ApplicationController(){
 		commMap = new HashMap<String, Handler>();
 		commMap.put("getPivots",new GetPivots());
+		commMap.put("createPivot",new CreatePivot());
 		commMap.put("createUser",new createUser());
 		commMap.put("test",new Test());
 	}
