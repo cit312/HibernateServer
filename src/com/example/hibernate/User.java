@@ -17,6 +17,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.quickconnectfamily.json.JSONException;
+import org.quickconnectfamily.json.JSONUtilities;
+
 @Entity
 @Table(name = "app_users")
 public class User implements Serializable{
@@ -72,6 +75,16 @@ public class User implements Serializable{
 	public String toString() {
 		return "User [user_id=" + user_id + ", uname=" + uname + ", uphone="
 				+ uphone + ", pivots=" + pivots + "]";
+	}
+	
+	public String toJson(){
+		try {
+			return JSONUtilities.stringify(this);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "dang it";
 	}
     
 }

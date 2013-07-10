@@ -84,37 +84,39 @@ public class DbInteraction {
         /*
          * iterate over each User instance returned by the query and found in the list.
          */
-//        Iterator<User> iter = users.iterator();
-//        while(iter.hasNext()) {
-//            User element = iter.next();
-//            System.out.println("--------NEW ITERATION THING-------");
-//            System.out.println(element.toString());
-//            System.out.println("num of pivots: "+element.getPivots().size());
-//
-//            Iterator<Pivots> iter2 = element.getPivots().iterator();
-//            while(iter2.hasNext()){
-//            	Pivots element2 = iter2.next();
-//            	System.out.println(element2.getName());
-//            }
-//        }
-        transaction.commit();
-        
-        //Convert to hash map
-        HashMap theUsers = new HashMap();
+        HashMap mapUsers = new HashMap();
         Iterator<User> iter = users.iterator();
+        
         while(iter.hasNext()) {
             User element = iter.next();
-            try {
-				theUsers.put(element.getId(), JSONUtilities.stringify(element));
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
+            
+            //put stuff into hashmap
+            HashMap temp = new HashMap();
+            temp.put("ID", element.getId());
+            temp.put("uName", element.getUname());
+            temp.put("uPhone", element.getPhone());
+            
+            
+//            System.out.println("num of pivots: "+element.getPivots().size());
+//
+            Iterator<Pivots> iter2 = element.getPivots().iterator();
+            HashMap allTempPivots = new HashMap();
+            while(iter2.hasNext()){
+            	Pivots element2 = iter2.next();
+            	HashMap tempPivot = new HashMap();
+            	tempPivot.put("name", element2.getName());
+            	tempPivot.put("ID", element2.getId());
+//            	tempPivots.put("name", element2.getLog());
+            	allTempPivots.put(element2.getName() + element2.getId(), tempPivot);
+            }
+            
+            temp.put("Pivots", allTempPivots);
+            mapUsers.put(element.getId(), temp);
         }
+        transaction.commit();
         
         
-        return theUsers;
+        return mapUsers;
     }
     
 //    /*
