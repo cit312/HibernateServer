@@ -1,25 +1,28 @@
 import java.util.HashMap;
 
+import com.example.hibernate.DbInteraction;
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 
 public class CreatePivot implements Handler {
 
 	@Override
 	public CommBean handleIt(HashMap data) {
 		//Collect Vars
-				
-		//Get the correct bean crap
-		HashMap<String,HashMap> pivots = new HashMap<String,HashMap>();
-		HashMap<String,String> attr = new HashMap<String,String>();
-		attr.put("ID", "1");
-		attr.put("Attr2", "Added Pivot");
-		attr.put("Attr3", "160 degrees to the left");
-		pivots.put("Pivot 1", attr);
+		data = (HashMap) data.get("data");
+		String phone = (String) data.get("number");
+		String newPivotName = (String) data.get("newPivot");
+
+		//Get Data from db
+		DbInteraction dbInteraction = new DbInteraction();
 		
+		//Put data into bean
+		String error = dbInteraction.addPivots(newPivotName);
 		
 		//put data into CommBean (serializable)
 		CommBean pivotsCommBean = new CommBean();
-		pivotsCommBean.setData(pivots);
-				
+		pivotsCommBean.setError(error);
+		
 		return pivotsCommBean;
 	}
 
