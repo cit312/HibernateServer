@@ -106,10 +106,23 @@ public class DbInteraction {
             HashMap allTempPivots = new HashMap();
             while(iter2.hasNext()){
             	Pivots element2 = iter2.next();
+            	
             	HashMap tempPivot = new HashMap();
-            	tempPivot.put("id", element2.getId());
-            	tempPivot.put("pivotNotes", element2.getPivot_notes());
+            	tempPivot.put("pivot_id", element2.getId());
             	allTempPivots.put(element2.getName(), tempPivot);
+            	
+            	//Get all them note logs
+            	Iterator<PivotLog> iter3 = element2.getNotes().iterator();
+            	HashMap allTempLog = new HashMap();
+                while(iter3.hasNext()){
+                	PivotLog element3 = iter3.next();
+                	HashMap tempLog = new HashMap();
+                	
+                	tempLog.put("note_id", element3.getNote_id());
+                	tempLog.put("note", element3.getNote());
+                	allTempLog.put(element3.getNote_id(), tempLog);
+                }
+                temp.put("Notes", allTempLog);
             }
             
             temp.put("Pivots", allTempPivots);

@@ -1,18 +1,29 @@
 package com.example.hibernate;
+import java.io.Serializable;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 @Entity
 @Table(name = "pivots")
-public class Pivots {
+public class Pivots{
     
     @Id
     @GeneratedValue
     private Integer pivot_id;
     private String  pivot_name;
-    private String  pivot_notes;
-    
+    @ManyToMany(cascade=CascadeType.ALL)
+    @JoinTable(name="pivotsMap", 
+    		   joinColumns = { @JoinColumn( name="pivot_id") },
+               inverseJoinColumns = { @JoinColumn( name="note_id")}
+               )    
+    private Set<PivotLog> note;
     
     public Integer getId() {
         return pivot_id;
@@ -27,18 +38,19 @@ public class Pivots {
     public void setName(String pivot_name) {
         this.pivot_name = pivot_name;
     } 
- 
-	public String getPivot_notes() {
-		return pivot_notes;
-	}
-	public void setPivot_notes(String pivot_notes) {
-		this.pivot_notes = pivot_notes;
-	}
 	
+	public Set<PivotLog> getNotes() {
+		return note;
+	}
+	public void setNote(Set<PivotLog> note) {
+		this.note = note;
+	}
 	@Override
 	public String toString() {
 		return "Pivots [pivot_id=" + pivot_id + ", pivot_name=" + pivot_name
-				+ ", pivot_notes=" + pivot_notes + "]";
+				+ ", note=" + note + "]";
 	}
+
+	
     
 }

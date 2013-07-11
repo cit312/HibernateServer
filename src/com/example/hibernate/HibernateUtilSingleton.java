@@ -64,6 +64,8 @@ private static final SessionFactory sessionFactory;
             config.addAnnotatedClass(User.class);
 
             config.addAnnotatedClass(Pivots.class);
+            
+            config.addAnnotatedClass(PivotLog.class);
 
             sessionFactory = config.buildSessionFactory();
 
