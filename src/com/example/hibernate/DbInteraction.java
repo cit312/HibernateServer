@@ -95,7 +95,7 @@ public class DbInteraction {
             
             //put stuff into hashmap
             HashMap temp = new HashMap();
-            temp.put("ID", ((User) user).getId());
+            temp.put("id", ((User) user).getId());
             temp.put("uName", ((User) user).getUname());
             temp.put("uPhone", ((User) user).getPhone());
             
@@ -107,7 +107,7 @@ public class DbInteraction {
             while(iter2.hasNext()){
             	Pivots element2 = iter2.next();
             	HashMap tempPivot = new HashMap();
-            	tempPivot.put("ID", element2.getId());
+            	tempPivot.put("id", element2.getId());
             	tempPivot.put("pivotNotes", element2.getPivot_notes());
             	allTempPivots.put(element2.getName(), tempPivot);
             }
