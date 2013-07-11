@@ -11,9 +11,7 @@ public class Pivots {
     @GeneratedValue
     private Integer pivot_id;
     private String  pivot_name;
-    private String  pivot_degrees;
-    private String  pivot_direction;
-    private String  pivot_status;
+    private String  pivot_notes;
     
     
     public Integer getId() {
@@ -28,36 +26,19 @@ public class Pivots {
     }
     public void setName(String pivot_name) {
         this.pivot_name = pivot_name;
-    }
-    
-    public String getDeg() {
-        return pivot_degrees;
-    }
-    public void setDeg(String pivot_degrees) {
-        this.pivot_degrees = pivot_degrees;
-    }
-    
-    public String getDirection() {
-        return pivot_direction;
-    }
-    public void setDirection(String pivot_direction) {
-        this.pivot_direction = pivot_direction;
-    }
-    
-    public String getStatus() {
-        return pivot_status;
-    }
-    public void setStatus(String pivot_status) {
-        this.pivot_status = pivot_status;
-    }
-    
-    
+    } 
+ 
+	public String getPivot_notes() {
+		return pivot_notes;
+	}
+	public void setPivot_notes(String pivot_notes) {
+		this.pivot_notes = pivot_notes;
+	}
+	
 	@Override
 	public String toString() {
 		return "Pivots [pivot_id=" + pivot_id + ", pivot_name=" + pivot_name
-				+ ", pivot_degrees=" + pivot_degrees + ", pivot_direction="
-				+ pivot_direction + ", pivot_status=" + pivot_status + "]";
+				+ ", pivot_notes=" + pivot_notes + "]";
 	}
-    
     
 }

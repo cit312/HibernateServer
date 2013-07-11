@@ -106,7 +106,7 @@ public class DbInteraction {
             	HashMap tempPivot = new HashMap();
             	tempPivot.put("name", element2.getName());
             	tempPivot.put("ID", element2.getId());
-//            	tempPivots.put("name", element2.getLog());
+            	tempPivot.put("pivotNotes", element2.getPivot_notes());
             	allTempPivots.put(element2.getName() + element2.getId(), tempPivot);
             }
             
