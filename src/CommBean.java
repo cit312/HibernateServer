@@ -13,4 +13,12 @@ public class CommBean implements Serializable{
     public void setData(HashMap data){
     	this.data = data;
     }
+
+	@Override
+	public String toString() {
+		return "CommBean [data=" + data + ", error=" + error + "]";
+	}
+    
+    
+    
 }

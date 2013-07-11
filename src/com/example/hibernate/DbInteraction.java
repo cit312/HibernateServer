@@ -81,7 +81,6 @@ public class DbInteraction {
          */
         //users = allUsersQuery.list();
         User user = (User) allUsersQuery.uniqueResult();
-        System.out.println("HURRR: " + user);
         
         //System.out.println("num users: "+users.size());
         /*
@@ -109,7 +108,7 @@ public class DbInteraction {
             	
             	HashMap tempPivot = new HashMap();
             	tempPivot.put("pivot_id", element2.getId());
-            	allTempPivots.put(element2.getName(), tempPivot);
+            	
             	
             	//Get all them note logs
             	Iterator<PivotLog> iter3 = element2.getNotes().iterator();
@@ -120,9 +119,12 @@ public class DbInteraction {
                 	
                 	tempLog.put("note_id", element3.getNote_id());
                 	tempLog.put("note", element3.getNote());
+                	System.out.println("HURR: " + element3.getNote());
                 	allTempLog.put(element3.getNote_id(), tempLog);
                 }
-                temp.put("Notes", allTempLog);
+                tempPivot.put("Notes", allTempLog);
+                
+                allTempPivots.put(element2.getName(), tempPivot);
             }
             
             temp.put("Pivots", allTempPivots);

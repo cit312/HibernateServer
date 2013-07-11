@@ -41,7 +41,8 @@ public class ServerClientInteraction implements Runnable{
 			CommBean returnedData = apCntrl.handleRequest(command, inString);
 			
 			//Debugging. See incoming hashmap
-			System.out.println(inString);
+			System.out.println("INCOMING:" + inString);
+			System.out.println("OUTGOING:" + returnedData.toString());
 			
 			//*** 3. Return Data ***
 			
