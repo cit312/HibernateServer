@@ -1,25 +1,28 @@
 import java.util.HashMap;
 
+import com.example.hibernate.DbInteraction;
+
 
 public class CreateLog implements Handler {
 
 	@Override
 	public CommBean handleIt(HashMap data) {
 		//Collect Vars
+		data = (HashMap) data.get("data");
+		String phone = (String) data.get("number");
+		String newLog = (String) data.get("newLog");
+		Long pivotID = (long) data.get("pivotID");
+
+		//Get Data from db
+		DbInteraction dbInteraction = new DbInteraction();
 		
-		//Get the correct bean crap
-		HashMap<String,HashMap> pivots = new HashMap<String,HashMap>();
-		HashMap<String,String> attr = new HashMap<String,String>();
-		attr.put("ID", "1");
-		attr.put("Attr2", "Added Log");
-		attr.put("Attr3", "160 degrees to the left");
-		pivots.put("Pivot 1", attr);
-		
+		//Put data into bean
+		String error = dbInteraction.addLog( newLog, pivotID);
 		
 		//put data into CommBean (serializable)
 		CommBean pivotsCommBean = new CommBean();
-		pivotsCommBean.setData(pivots);
-				
+		pivotsCommBean.setError(error);
+		
 		return pivotsCommBean;
 	}
 

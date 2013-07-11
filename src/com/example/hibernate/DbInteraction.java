@@ -31,6 +31,9 @@ public class DbInteraction {
         DbInteraction aSillyHibernateUseExample = new DbInteraction();
         //aSillyHibernateUseExample.addNewUsers();
         //System.out.println(aSillyHibernateUseExample.showAllUsers());
+        System.out.println(aSillyHibernateUseExample.addLog("HERHINGasdfasdf", 1));
+        //System.out.println("----------------------------------------");
+        //System.out.println(aSillyHibernateUseExample.showAllUsers());
         //System.out.println(aSillyHibernateUseExample.addPivots());
         //aSillyHibernateUseExample.deletePivots();
         //aSillyHibernateUseExample.modifyUser();
@@ -119,7 +122,7 @@ public class DbInteraction {
                 	
                 	tempLog.put("note_id", element3.getNote_id());
                 	tempLog.put("note", element3.getNote());
-                	System.out.println("HURR: " + element3.getNote());
+                	//System.out.println("HURR: " + element3.getNote());
                 	allTempLog.put(element3.getNote_id(), tempLog);
                 }
                 tempPivot.put("Notes", allTempLog);
@@ -167,6 +170,47 @@ public class DbInteraction {
 //        showAllUsers();
 //    }
 //    
+	  public String addLog(String log, long id) {
+		  Session session = HibernateUtilSingleton.getSessionFactory().getCurrentSession();
+		  Transaction transaction = session.beginTransaction();
+	  /*
+	   * get two User instances from the database using HQL.  This is NOT SQL.  It is object based.
+	   */
+		  Query joshuaQuery = session.createQuery("select u from Pivots as u where pivot_id=" + id);
+		  Pivots joshuaUser = (Pivots) joshuaQuery.uniqueResult();
+	  /*
+	   * create a PhoneNumber instance
+	   */
+		  PivotLog pivotLog = new PivotLog();
+		  pivotLog.setNote(log);
+//	  	Pivots newPivot = new Pivots();
+//	  	newPivot.setName(log);
+	                             
+		  /*
+		   * 	add the shared phone number to the joshuaUser 
+		   */
+	 
+		  Set<PivotLog> userNotes = joshuaUser.getNote(); 
+		  userNotes.add(pivotLog);
+	
+		  session.save(joshuaUser);
+		  /*
+	  * 	inform the database that the modified User instances should be ready for permanent storage.
+	  	*/
+		  session.merge(joshuaUser);
+		  /*
+		   * permanently store the changes into the database tables.
+		   */
+		  transaction.commit();
+		  /*
+		   * show that the database was updated by printing out all of the User instances created by a HQL query
+		   */
+		  //showAllUsers();
+	 
+		  return "null";
+	}    
+    
+    
     
     
     
@@ -191,6 +235,8 @@ public class DbInteraction {
 	 
 	 Set<Pivots> joshuaPivots = joshuaUser.getPivots(); 
 	 joshuaPivots.add(newPivot);
+	 
+	 System.out.println("HURR: " + joshuaPivots.toString());
 	
 	 session.save(newPivot);
 	 /*

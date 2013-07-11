@@ -25,7 +25,10 @@ public class Pivots{
                )    
     private Set<PivotLog> note;
     
-    public Integer getId() {
+    public Set<PivotLog> getNote() {
+		return note;
+	}
+	public Integer getId() {
         return pivot_id;
     }
     public void setId(Integer pivot_id) {

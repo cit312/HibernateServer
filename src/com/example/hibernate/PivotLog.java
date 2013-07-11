@@ -19,12 +19,6 @@ public class PivotLog implements Serializable{
     private Integer note_id;
     private String note;
     
-	public Integer getNote_id() {
-		return note_id;
-	}
-	public void setNote_id(Integer note_id) {
-		this.note_id = note_id;
-	}
 	public String getNote() {
 		return note;
 	}
@@ -35,6 +29,13 @@ public class PivotLog implements Serializable{
 	public String toString() {
 		return "PivotLog [note_id=" + note_id + ", note=" + note + "]";
 	}
+	public Integer getNote_id() {
+		return note_id;
+	}
+	public void setNote_id(Integer note_id) {
+		this.note_id = note_id;
+	}
+	
     
     
     
