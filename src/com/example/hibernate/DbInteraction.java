@@ -75,48 +75,50 @@ public class DbInteraction {
         /*
          * execute a HQL query against the database.  HQL is NOT SQL.  It is object based.
          */
-        Query allUsersQuery = session.createQuery("select u from User as u order by u.user_id");
+        Query allUsersQuery = session.createQuery("select u from User as u where uphone=2083905008");
         /*
          * get a list of User instances based on what was found in the database tables.
          */
-        users = allUsersQuery.list();
-        System.out.println("num users: "+users.size());
+        //users = allUsersQuery.list();
+        User user = (User) allUsersQuery.uniqueResult();
+        System.out.println("HURRR: " + user);
+        
+        //System.out.println("num users: "+users.size());
         /*
          * iterate over each User instance returned by the query and found in the list.
          */
-        HashMap mapUsers = new HashMap();
-        Iterator<User> iter = users.iterator();
+        //HashMap mapUsers = new HashMap();
+        //Iterator<User> iter = users.iterator();
         
-        while(iter.hasNext()) {
-            User element = iter.next();
+        //while(iter.hasNext()) {
+         //   User element = iter.next();
             
             //put stuff into hashmap
             HashMap temp = new HashMap();
-            temp.put("ID", element.getId());
-            temp.put("uName", element.getUname());
-            temp.put("uPhone", element.getPhone());
+            temp.put("ID", ((User) user).getId());
+            temp.put("uName", ((User) user).getUname());
+            temp.put("uPhone", ((User) user).getPhone());
             
             
 //            System.out.println("num of pivots: "+element.getPivots().size());
 //
-            Iterator<Pivots> iter2 = element.getPivots().iterator();
+            Iterator<Pivots> iter2 = ((User) user).getPivots().iterator();
             HashMap allTempPivots = new HashMap();
             while(iter2.hasNext()){
             	Pivots element2 = iter2.next();
             	HashMap tempPivot = new HashMap();
-            	tempPivot.put("name", element2.getName());
             	tempPivot.put("ID", element2.getId());
             	tempPivot.put("pivotNotes", element2.getPivot_notes());
-            	allTempPivots.put(element2.getName() + element2.getId(), tempPivot);
+            	allTempPivots.put(element2.getName(), tempPivot);
             }
             
             temp.put("Pivots", allTempPivots);
-            mapUsers.put(element.getId(), temp);
-        }
+           // mapUsers.put("Data", temp);
+        //}
         transaction.commit();
         
         
-        return mapUsers;
+        return temp;
     }
     
 //    /*

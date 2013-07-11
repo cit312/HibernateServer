@@ -15,7 +15,7 @@ public class GetAppUsers implements Handler {
 		
 		//Put data into bean
 		HashMap<String,HashMap> app_users = new HashMap<String,HashMap>();
-		app_users.put("Users", dbInteraction.showAllUsers());
+		app_users = dbInteraction.showAllUsers();
 		
 		//put data into CommBean (serializable)
 		CommBean pivotsCommBean = new CommBean();
